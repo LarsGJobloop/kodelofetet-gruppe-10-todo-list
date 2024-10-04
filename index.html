@@ -9,11 +9,25 @@
   </head>
   <body>
     <header>
-      <h1>Todo List</h1>
+      <h1>Gjøremåls Liste</h1>
     </header>
 
     <main>
-      <!-- Her kommer Gjøremåls Listen -->
+      <!-- Her er input HTML -->
+      <form id="user-input">
+        <label for="todo">Gjøremål</label>
+        <input type="text" name="todo" id="todo" />
+
+        <button type="submit">Legg Til</button>
+      </form>
+
+      <!-- Gjøremåls listen -->
+      <ul id="todo-list">
+        <!-- Eksempel HTML for Gjøremåls Kort -->
+        <li>
+          <h2>Mat Haien</h2>
+        </li>
+      </ul>
     </main>
   </body>
 </html>
