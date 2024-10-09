@@ -1,7 +1,19 @@
 let userInput = document.querySelector("#user-input");
 let todoListElement = document.querySelector("#todo-list");
 
-let todos = [];
+let storedTodos = localStorage.getItem("todos");
+let convertedTodos = JSON.parse(storedTodos);
+
+let todos;
+if (storedTodos === null) {
+  // Viss det er første besøk på siden, lag en ny liste
+  todos = [];
+} else {
+  // Viss det var noe lagret i LocalStorage, bruk det
+  todos = convertedTodos;
+}
+
+renderTodos();
 
 // Dette er det som skal skje når brukeren trykker på
 // Legg til knappen
@@ -14,17 +26,11 @@ function handleSubmit(event) {
   console.log("Append new todo to todo list...");
   todos.push(newTodo);
 
-  console.log("Clearing out the old todos from the document...");
-  todoListElement.innerHTML = "";
+  console.log("Updating the stored list...");
+  let jsonTodos = JSON.stringify(todos);
+  localStorage.setItem("todos", jsonTodos);
 
-  console.log("Appending all todos to the Document...");
-  todos.forEach((todo, index) => {
-    // Først lage det HTML for det gjøremålet
-    let newTodoCard = createTodoCard(todo);
-
-    // Legg det nye html element til i Dokumentet
-    todoListElement.append(newTodoCard);
-  });
+  renderTodos();
 }
 
 userInput.addEventListener("submit", handleSubmit);
@@ -54,4 +60,19 @@ function createTodoCard(todoObject) {
   titleElement.textContent = todoObject.title;
 
   return todoCard;
+}
+
+// Denne er ansvarlig for å oppdatere HTML
+function renderTodos() {
+  console.log("Clearing out the old todos from the document...");
+  todoListElement.innerHTML = "";
+
+  console.log("Appending all todos to the Document...");
+  todos.forEach((todo, index) => {
+    // Først lage det HTML for det gjøremålet
+    let newTodoCard = createTodoCard(todo);
+
+    // Legg det nye html element til i Dokumentet
+    todoListElement.append(newTodoCard);
+  });
 }
