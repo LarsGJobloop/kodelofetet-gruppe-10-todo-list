@@ -5,24 +5,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="script.js"></script>
   </head>
-  <body>
-    <header>
-      <h1>Gjøremåls Liste</h1>
+  <bodys>
+    <header class="bg-blue-300">
+      <h1 class="text-center underline  text-2xl text-blue-300 text-shadow">Gjøremåls Liste</h1>
     </header>
 
     <main>
       <!-- Her er input HTML -->
-      <form id="user-input">
-        <label for="todo">Gjøremål</label>
-        <input type="text" name="todo" id="todo" />
+      <form class="bg-purple-100 p-4 w-2/3" id="user-input">
+        <label class="text-purple-100 text-shadow" for="todo">Gjøremål</label>
+        <input class="bg-purple-400 rounded-full" type="text" name="todo" id="todo" />
 
-        <button type="submit">Legg Til</button>
+        <button class="bg-green-300 hover:bg-green-200" type="submit">Legg Til</button>
       </form>
 
       <!-- Gjøremåls listen -->
-      <ul id="todo-list"></ul>
+      <ul class="flex flex-col gap-4 items-center bg-slate-200 p-4 m-4" id="todo-list"></ul>
     </main>
   </body>
 </html>
