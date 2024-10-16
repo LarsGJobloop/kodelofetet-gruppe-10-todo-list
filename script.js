@@ -32,6 +32,9 @@ function handleSubmit(event) {
   let jsonTodos = JSON.stringify(todos);
   localStorage.setItem("todos", jsonTodos);
 
+  console.log("Resetting form element...");
+  userInput.reset();
+
   renderTodos();
 }
 
