@@ -8,6 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="script.js"></script>
   </head>
+
+  <body>
     <header class="bg-blue-30 flex justify-between items-center px-4">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -29,17 +31,27 @@
       </h1>
     </header>
 
-    <main>
+    <main class="p-4 flex flex-col gap-8">
       <!-- Her er input HTML -->
-      <form class="bg-purple-100 p-4 w-2/3" id="user-input">
+      <form
+        class="bg-purple-200 p-4 flex gap-4 flex-col shadow-xl rounded"
+        id="user-input"
+      >
         <label class="text-purple-100 text-shadow" for="todo">Gjøremål</label>
-        <input class="bg-purple-400 rounded-full" type="text" name="todo" id="todo" />
+        <input
+          class="bg-purple-400 rounded-full"
+          type="text"
+          name="todo"
+          id="todo"
+        />
 
-        <button class="bg-green-300 hover:bg-green-200" type="submit">Legg Til</button>
+        <button class="bg-green-300 hover:bg-green-200" type="submit">
+          Legg Til
+        </button>
       </form>
 
       <!-- Gjøremåls listen -->
-      <ul class="flex flex-col gap-4 items-center bg-slate-200 p-4 m-4" id="todo-list"></ul>
+      <ul class="flex flex-col gap-4 items-center" id="todo-list"></ul>
     </main>
   </body>
 </html>
