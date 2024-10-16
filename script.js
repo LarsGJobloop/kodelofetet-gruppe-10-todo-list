@@ -1,3 +1,6 @@
+/**
+ * @type {HTMLFormElement}
+ */
 let userInput = document.querySelector("#user-input");
 let todoListElement = document.querySelector("#todo-list");
 
@@ -17,8 +20,12 @@ if (storedTodos === null) {
 
 renderTodos();
 
-// Dette er det som skal skje når brukeren trykker på
-// Legg til knappen
+/**
+ * Dette er det som skal skje når brukeren trykker på
+ * Legg til knappen
+ *
+ * @param {*} event
+ */
 function handleSubmit(event) {
   event.preventDefault(); // Forhindrer nettsiden og lastes inn på nytt (refresh)
 
@@ -40,12 +47,17 @@ function handleSubmit(event) {
 
 // Denne leser av dataen i et form element
 // og lager et JavaScript objekt for Gjøremålene
+/**
+ * @param {HTMLFormElement} form
+ * @returns
+ */
 function createTodoObject(form) {
   let todo = form.querySelector("#todo");
   let todoValue = todo.value;
 
   let todoObject = {
     title: todoValue,
+    createdAt: new Date().toISOString(),
   };
 
   return todoObject;
@@ -56,31 +68,37 @@ function createTodoCard(todoObject) {
   let todoCard = document.createElement("li");
   let titleElement = document.createElement("h2");
   let deleteButton = document.createElement("button");
+  let checkMark = document.createElement("img");
+  let completeButton = document.createElement("button");
 
   // Sett de sammen til ett element
   todoCard.append(titleElement);
   todoCard.append(deleteButton);
+  todoCard.append(completeButton);
+  deleteButton.append(checkMark);
 
-  // Konfigure elementene med korrekt verdier
-  todoCard.className = "bg-emerald-300 w-full p-4 rounded shadow-xl flex gap-1";
+  // Set CSS Klassene de skal ha (styling)
+  todoCard.className =
+    "bg-emerald-300 flex flex-col p-4 rounded shadow-xl flex gap-1";
   titleElement.className = "underline";
   deleteButton.className = "bg-red-400 px-4 py-2 rounded hover:bg-red-300";
+  completeButton.className = "bg-teal-500 px-4 py-2 rounded hover:bg-teal-400";
+  checkMark.className = "h-4 w-4";
 
+  // Konfigurer andre verdier de
   titleElement.textContent = todoObject.title;
-  deleteButton.textContent = "Delete";
+  checkMark.src = "assets/icon-checkmark.svg";
   deleteButton.addEventListener("click", () => {
     console.log("Deleting todo...");
 
     // Fjern "todoObject" fra "todos" listen
     let filteredTodos = todos.filter((todo) => {
-      if (todo.title === todoObject.title) {
+      if (todo.id === todoObject.id) {
         return false;
       } else {
         return true;
       }
     });
-
-    console.log(filteredTodos);
 
     todos = filteredTodos;
 
@@ -89,6 +107,7 @@ function createTodoCard(todoObject) {
 
     renderTodos();
   });
+  completeButton.textContent = "Done";
 
   return todoCard;
 }
